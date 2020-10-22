@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebGL Demo</title>
+        <style>
+            canvas {
+                border: 1px dashed #333;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <canvas id="main" width="800" height="800"></canvas>
+        </div>
+        <script id="vertexShader" type="x-shader/x-vertex">
+            attribute vec4 a_Position;
+            void main(){
+                gl_Position = a_Position;
+                gl_PointSize = 10.0;
+            }
+        </script>
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            uniform vec4 u_FragColor;
+            void main(){
+                gl_FragColor = u_FragColor;
+            }
+        </script>
+        <script src="../static/main.js"></script>
+    </body>
+</html>

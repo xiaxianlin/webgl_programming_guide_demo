@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebGL Demo</title>
+        <style>
+            canvas {
+                border: 1px dashed #333;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <canvas id="main" width="800" height="800"></canvas>
+        </div>
+        <script id="vertexShader" type="x-shader/x-vertex">
+            attribute vec4 a_Position;
+            uniform float theta;
+            void main(){
+                gl_Position = vec4( 
+                    a_Position.x * cos(theta) - a_Position.y * sin(theta),
+                    a_Position.x * sin(theta) + a_Position.y * cos(theta),
+                    // a_Position.x * cos(theta) + a_Position.y * sin(theta),
+                    0.0,
+                    1.0
+                );
+                gl_PointSize = 50.0;
+            }
+        </script>
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            void main(){
+                float dist = distance(gl_PointCoord, vec2(0.5, 0.5));
+                if(dist < 0.5){
+                    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+                }else{
+                    discard;
+                }
+            }
+        </script>
+        <script src="../static/main.js"></script>
+    </body>
+</html>

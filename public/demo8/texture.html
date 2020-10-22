@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebGL Demo</title>
+        <style>
+            canvas {
+                border: 1px dashed #333;
+            }
+            .container {
+                display: flex;
+                justify-content: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <canvas id="main" width="800" height="800"></canvas>
+        </div>
+        <script id="vertexShader" type="x-shader/x-vertex">
+            attribute vec4 a_Position;
+            attribute vec2 a_TexCoord;
+
+            uniform mat4 u_MvpMatrix;
+
+            varying vec2 v_TexCoord;
+
+            void main(){
+                gl_Position = u_MvpMatrix * a_Position;
+                v_TexCoord = a_TexCoord;
+            }
+        </script>
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            uniform sampler2D u_Sampler;
+
+            varying vec2 v_TexCoord;
+
+            void main(){
+                gl_FragColor = texture2D(u_Sampler, v_TexCoord);
+            }
+        </script>
+        <script src="../static/main.js"></script>
+    </body>
+</html>

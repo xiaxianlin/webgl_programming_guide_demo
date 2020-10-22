@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebGL Demo</title>
+        <style>
+            canvas {
+                border: 1px dashed #333;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="main" width="1280" height="720"></canvas>
+        <script id="vertexShader" type="x-shader/x-vertex">
+            attribute vec4 vPosition;
+
+            // uniform vec4 vTranslation;
+
+            // uniform float uCosB, uSinB;
+
+            uniform mat4 xformMatrix;
+
+            void main(){
+                // gl_Position = vPosition + vTranslation;
+
+                // gl_Position.x = vPosition.x * uCosB - vPosition.y * uSinB;
+                // gl_Position.y = vPosition.x * uSinB + vPosition.y * uCosB;
+                // gl_Position.z = gl_Position.z;
+                // gl_Position.w = 1.0;
+                
+                gl_Position = xformMatrix * vPosition;
+            }
+        </script>
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            precision mediump float;
+
+            void main(){
+                gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
+            }
+        </script>
+        <script src="../static/main.js"></script>
+    </body>
+</html>
